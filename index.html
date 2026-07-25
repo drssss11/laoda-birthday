@@ -428,6 +428,22 @@
             font-weight: 300;
         }
 
+        /* ===== 音乐播放器 ===== */
+        .music-player {
+            margin-top: 16px;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 210, 140, 0.1);
+            animation: fadeIn 0.4s ease;
+        }
+
+        .music-player iframe {
+            display: block;
+        }
+
         @media (max-width: 540px) {
             .card {
                 padding: 24px 14px 28px;
@@ -509,6 +525,16 @@
                 <i>🔥</i> 以代码为剑，护网络安全 · 老大，生日快乐！ <i>🔥</i>
             </div>
             <button class="btn-sparkle" id="burstBtn">🎇 放烟花 🎇</button>
+            <button class="btn-sparkle" id="musicBtn">🎵 播放生日歌 🎵</button>
+        </div>
+
+        <!-- QQ音乐播放器 -->
+        <div class="music-player" id="musicPlayer" style="display:none;">
+            <iframe id="qqmusicFrame"
+                    src="https://i.y.qq.com/v8/playsong.html?songmid=002J4w8r0p4Wez&type=0&play=1"
+                    width="100%" height="80" frameborder="0"
+                    allow="autoplay">
+            </iframe>
         </div>
         <div class="signature">— 中国电信最年轻的首席安全专家 · 今日专属 —</div>
     </div>
@@ -780,6 +806,29 @@
             }
 
             document.getElementById('burstBtn').addEventListener('click', burstExtra);
+
+            // ============================================================
+            // 6. 音乐控制
+            // ============================================================
+            const musicBtn = document.getElementById('musicBtn');
+            const musicPlayer = document.getElementById('musicPlayer');
+            let musicPlaying = false;
+
+            musicBtn.addEventListener('click', function() {
+                if (!musicPlaying) {
+                    musicPlayer.style.display = 'block';
+                    musicBtn.innerHTML = '🎵 生日歌播放中... 🎵';
+                    musicBtn.style.background = 'rgba(255, 170, 80, 0.25)';
+                    musicBtn.style.borderColor = '#ffaa55';
+                    musicPlaying = true;
+                } else {
+                    musicPlayer.style.display = 'none';
+                    musicBtn.innerHTML = '🎵 播放生日歌 🎵';
+                    musicBtn.style.background = 'rgba(255, 180, 100, 0.12)';
+                    musicBtn.style.borderColor = 'rgba(255, 190, 110, 0.3)';
+                    musicPlaying = false;
+                }
+            });
 
             startFireworks();
 
